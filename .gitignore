@@ -1,0 +1,5 @@
+# Project exclude paths
+/target/
+/src/test
+.idea
+web_lab2.iml
