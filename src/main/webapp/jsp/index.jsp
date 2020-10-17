@@ -22,15 +22,15 @@
         <span id="header_text">
             Свистухин Андрей Николаевич <br>
             P3211 <br>
-            Вариант 2220 <br>
+            Вариант 2445 <br>
         </span>
     </header>
 
     <div class="info">
-        <p id="lab1_text">Лабораторная работа №1</p>
+        <p id="lab1_text">Лабораторная работа №2</p>
 
         <div class="image">
-            <img src="img/areas.jpg">
+            <img src="img/areas.jpg" alt="areas">
         </div>
 
         <div class="input_forms">
@@ -137,7 +137,7 @@
                     <td>R</td>
                     <td>Ответ</td>
                     <td>Время</td>
-                    <td>Время работы скрипта (мс)</td>
+                    <td>Время работы скрипта (мкс)</td>
                 </tr>
             </table>
         </div>

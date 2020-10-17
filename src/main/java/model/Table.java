@@ -19,4 +19,8 @@ public class Table {
     public static void setResponses(LinkedList<Response> responsesList) {
         responses = responsesList;
     }
+
+    public static Response getLastResponse() {
+        return responses.getLast();
+    }
 }

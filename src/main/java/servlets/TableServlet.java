@@ -3,6 +3,7 @@ package servlets;
 import model.Response;
 import model.Table;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,23 +21,24 @@ public class TableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        ServletContext servletContext = request.getServletContext();
+        long execStart = System.nanoTime();
+        servletContext.setAttribute("execStart", execStart);
+
         if (session.getAttribute("responses") != null) {
             Table.setResponses((LinkedList<Response>) session.getAttribute("responses"));
         }
 
-        System.out.println(session.getCreationTime() + " " + session.getId());
-
-        Response tableResponse = null;
+        Response tableResponse;
         Map<String, String[]> responseMap = request.getParameterMap();
-        try {
-            tableResponse = new Response(responseMap.get("x"), responseMap.get("y"),
-                    responseMap.get("r"));
-        } catch (NullPointerException e) {
-            System.err.println("Get request with null properties.");
-        }
-
-        if (tableResponse != null) {
-            Table.addResponse(tableResponse);
+        if (responseMap.containsKey("y") && responseMap.containsKey("r")) {
+            try {
+                tableResponse = new Response(responseMap.get("y"), responseMap.get("y"),    //CHANGE X TO Y
+                        responseMap.get("r"), execStart);
+                Table.addResponse(tableResponse);
+            } catch (NullPointerException | NumberFormatException e) {
+                System.err.println("Get request with null properties.");
+            }
         }
 
         session.setAttribute("responses", Table.getResponses());
@@ -47,9 +49,9 @@ public class TableServlet extends HttpServlet {
             ans.append("<tr>" + "<td>").append(resp.getX()).append("</td>")
                     .append("<td>").append(resp.getY()).append("</td>")
                     .append("<td>").append(resp.getR()).append("</td>")
-                    .append("<td>").append("ANSWER").append("</td>").append("<td>")
-                    .append("DATE").append("</td>").append("<td>").append("TIME")
-                    .append("</td>");
+                    .append("<td>").append(resp.getHit()).append("</td>").append("<td>")
+                    .append(resp.getDate()).append("</td>").append("<td>").append(resp.getExecTime())
+                    .append("</td> </tr>");
         }
 
         String answer = ans.toString();

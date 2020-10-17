@@ -26,6 +26,7 @@ $(document).ready(function () {
 $(document).ready(function(){
     $.ajax({
         url: "table",
+        type: "get",
         success: function(response) {
             let table = $('#tableAnswer');
             table.append(response);
