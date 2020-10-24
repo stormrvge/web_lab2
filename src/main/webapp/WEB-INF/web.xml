@@ -16,11 +16,30 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>tableServlet</servlet-name>
-        <servlet-class>servlets.TableServlet</servlet-class>
+        <servlet-name>mainPageTableServlet</servlet-name>
+        <servlet-class>servlets.MainPageTableServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>tableServlet</servlet-name>
+        <servlet-name>mainPageTableServlet</servlet-name>
+        <url-pattern>/mainTable</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tablePageController</servlet-name>
+        <servlet-class>servlets.TablePageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tablePageController</servlet-name>
         <url-pattern>/table</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tablePageServlet</servlet-name>
+        <servlet-class>servlets.TablePageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tablePageServlet</servlet-name>
+        <url-pattern>/tableServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

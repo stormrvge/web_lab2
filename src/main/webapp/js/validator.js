@@ -1,34 +1,12 @@
-function checkInbound(input) {
-    if (isNaN(input.value) || (input.value < -3 || input.value > 3))
-    {
-        if (!input.className.includes("error")) {
-            input.className = input.className + " error";
-        }
-    }
-    else
-    {
-        input.className = input.className.replace(" error", "");
-        return true;
-    }
+function openTable() {
+    let url = sessionStorage.getItem("urlContext");
+    window.location.replace(url + "/table");
 }
 
-function checkboxValidate(input) {
-    let checkboxes = document.getElementsByClassName("xRadioButton");
+function xButtonsValidate(input) {
+    let buttons = document.getElementsByClassName("xButton");
 
-    for (let i = 0; i < checkboxes.length; i++)
-    {
-        if (checkboxes[i].checked === true) {
-            checkboxes[i].checked = false;
-        }
-    }
-
-    input.checked = input.checked !== true;
-}
-
-function rButtonsValidate(input) {
-    let buttons = document.getElementsByClassName("rButton");
-
-    let hiddenInput = document.getElementById("rHiddenButton");
+    let hiddenInput = document.getElementById("xHiddenButton");
 
     hiddenInput.value = input.value;
     console.log(hiddenInput.value);
@@ -44,41 +22,64 @@ function rButtonsValidate(input) {
     input.className = input.className + " greenButton";
 }
 
-function validateForm() {
-    let checkboxes = document.getElementsByClassName("xRadioButton");
-    let checkedButtons = 0;
+function checkInboundY(input) {
+    if (isNaN(input.value) || (input.value < -3 || input.value > 5))
+    {
+        if (!input.className.includes("error")) {
+            input.className = input.className + " error";
+        }
+    }
+    else
+    {
+        input.className = input.className.replace(" error", "");
+        return true;
+    }
+}
 
+function checkInboundR(input) {
+    if (isNaN(input.value) || (input.value < 1 || input.value > 4))
+    {
+        if (!input.className.includes("error")) {
+            input.className = input.className + " error";
+        }
+    }
+    else
+    {
+        input.className = input.className.replace(" error", "");
+        return true;
+    }
+}
+
+function validateForm() {
+    let xButton = document.getElementById("xHiddenButton");
     let yInput = document.getElementById("y");
-    let rButton = document.getElementById("rHiddenButton");
+    let rInput = document.getElementById("r");
 
     let check = true;
 
-    for (let i = 0; i < checkboxes.length; i++)
-    {
-        if (checkboxes[i].checked === true)
-            checkedButtons++;
-    }
-
-    if (checkedButtons !== 1) {
+    if (xButton.value < -2 || xButton.value > 2) {
         document.getElementsByClassName("x")[0].style.backgroundColor = "#ffa6b5";
         check = false;
     } else {
         document.getElementsByClassName("x")[0].style.backgroundColor = "#f7f7f7";
     }
 
-    if (!checkInbound(yInput) || yInput.value === "") {
+
+    if (!checkInboundY(yInput) || yInput.value === "") {
         document.getElementsByClassName("y")[0].style.backgroundColor = "#ffa6b5";
         check = false;
     } else {
         document.getElementsByClassName("y")[0].style.backgroundColor = "#f7f7f7";
     }
 
-    if (rButton.value < 1 || rButton.value > 5) {
+    if (!checkInboundR(rInput) || rInput.value === "") {
         document.getElementsByClassName("r")[0].style.backgroundColor = "#ffa6b5";
         check = false;
     } else {
         document.getElementsByClassName("r")[0].style.backgroundColor = "#f7f7f7";
     }
+
+
 
     console.log("validate " + check);
     return check;
@@ -86,8 +87,8 @@ function validateForm() {
 
 
 function clearButtons() {
-    let buttons = document.getElementsByClassName("rButton");
-    document.getElementById("rHiddenButton").value = "";
+    let buttons = document.getElementsByClassName("xButton");
+    document.getElementById("xHiddenButton").value = "";
 
     for (let i = 0; i < buttons.length; i++)
     {
