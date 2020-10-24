@@ -30,7 +30,7 @@
         <p id="lab1_text">Лабораторная работа №2</p>
 
         <div class="image">
-            <img src="img/areas.jpg" alt="areas" id="area">
+            <canvas id="Canvas" width="350" height="350"></canvas>
         </div>
 
         <div class="input_forms">
@@ -116,10 +116,6 @@
             </table>
         </div>
     </div>
-
-    <p>Click on the map to place a marker</p>
-    <canvas id="Canvas" width="350" height="350"></canvas>
-
 
     <footer>
         Footer of the site.

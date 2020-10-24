@@ -46,7 +46,7 @@ header {
     margin-right: 45px;
 }
 
-.image img {
+canvas {
     box-shadow: 1px 1px 4px rgb(160 160 160);
     height: 350px;
     width: 350px;
