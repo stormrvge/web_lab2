@@ -52,12 +52,12 @@ public class MainPageTableServlet extends HttpServlet {
         ServletContext servletContext = request.getServletContext();
         long execStart = (long) servletContext.getAttribute("execStart");
 
-        if (session.getAttribute("requests") != null) {
+        if (session.getAttribute("requests") != null)
             Table.setRequests((LinkedList<Request>) session.getAttribute("requests"));
-        }
 
         Request tableRequest;
         Map<String, String[]> responseMap = request.getParameterMap();
+
         if ((responseMap.containsKey("x") && responseMap.containsKey("y") && responseMap.containsKey("r"))) {
             try {
                 tableRequest = new Request(responseMap.get("x"), responseMap.get("y"), responseMap.get("r"), execStart);
@@ -69,7 +69,6 @@ public class MainPageTableServlet extends HttpServlet {
                 System.err.println("Get request with null properties.");
             }
         }
-
         session.setAttribute("requests", Table.getRequests());
     }
 }

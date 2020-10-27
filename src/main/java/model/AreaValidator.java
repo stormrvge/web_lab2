@@ -1,9 +1,11 @@
 package model;
 
 public class AreaValidator {
+    public static final String success = "Попал";
+    public static final String invalid = "Не попал";
+
     public static void validateArea(Request request) {
-        String success = "Попал";
-        String invalid = "Не попал";
+
 
         float x = request.getX();
         float y = request.getY();

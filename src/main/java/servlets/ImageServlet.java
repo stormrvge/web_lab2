@@ -1,5 +1,6 @@
 package servlets;
 
+import model.AreaValidator;
 import model.Table;
 
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         MainPageTableServlet.addRequest(request);
-        String hit = Table.getLastRequest().getHit().equals("Попал") ? "true" : "false";
+        String hit = Table.getLastRequest().getHit().equals(AreaValidator.success) ? "true" : "false";
 
         OutputStream outputStream = response.getOutputStream();
         outputStream.write((Table.getShortRequestString() + "ENDOFTABLE\n" + hit).getBytes(StandardCharsets.UTF_8));

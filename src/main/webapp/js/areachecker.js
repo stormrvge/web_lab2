@@ -13,24 +13,12 @@ class Point {
     }
 }
 
-function fromPointsToPixels(x, y) {
-    pixel_step = 125 / r.value;
-
-    let pointX = centerPosX + (x * pixel_step);
-    let pointY = centerPosY - (y * pixel_step);
-
-    return new Point(pointX, pointY);
-}
-
 function fromPixelsToPoints(x, y) {
-
     let pointX = (x - centerPosX) / pixel_step;
     let pointY = (y - centerPosY) / -pixel_step;
 
     return new Point(pointX, pointY);
 }
-
-
 
 // Canvas init
 let canvas = document.getElementById('Canvas');
@@ -41,10 +29,6 @@ const centerPosY = canvas.offsetWidth / 2;
 
 let r = document.getElementById("r");
 let pixel_step;
-
-let MarkersMap = new Map();
-
-
 
 // Map sprite
 let spriteImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Bluedot.svg/1200px-Bluedot.svg.png";
@@ -67,7 +51,7 @@ let Marker = function () {
 }
 
 let Markers = [];
-let allMarkers = [];
+
 let mouseClicked = function (mouse) {
     if (r.value >= 1 && r.value <= 4) {
         pixel_step = 125 / r.value;
@@ -80,7 +64,6 @@ let mouseClicked = function (mouse) {
         let mouseXPos = (mouse.x - rect.left);
         let mouseYPos = (mouse.y - rect.top);
 
-        // Move the marker when placed to a better location
         let marker = new Marker();
         marker.XPos = mouseXPos - (marker.Width / 2);
         marker.YPos = mouseYPos - marker.Height;
@@ -88,10 +71,8 @@ let mouseClicked = function (mouse) {
         marker.XPoint = point.getX();
         marker.YPoint = point.getY();
 
-
         if ((marker.XPoint >= -2 && marker.XPoint <= 2) && (marker.YPoint >= -3 && marker.YPoint <= 5)) {
             Markers.push(marker);
-            allMarkers.push(marker);
 
             $.ajax({
                 url: "lab2",
@@ -102,7 +83,6 @@ let mouseClicked = function (mouse) {
                     r: $('#r').val(),
                     pic: "true"
                 },
-
                 success: function (response) {
                     let answer = response.split("ENDOFTABLE\n");
 
@@ -113,32 +93,17 @@ let mouseClicked = function (mouse) {
                         table.find('tr').remove('tr:not(:first)')
 
                     table.append(answer[0]);
-                    if (answer[1] === "true") {
-                        marker.Sprite.src = spriteImage;
-                        marker.hit = true;
-                    } else {
-                        marker.Sprite.src = redDotSprite;
-                        marker.hit = false;
-                    }
+                    answer[1] === "true" ? marker.Sprite.src = spriteImage : marker.Sprite.src = redDotSprite;
+                    answer[1] === "true" ? marker.hit = true : marker.hit = false;
                 }
             });
         } else {
-            $('.error_message').text('Данная точка не входит в множество');
-            setTimeout(function() {
-                $('.error_message').text(' ')
-            }, 4000);
+            printError("Данная точка не входит в множество");
         }
     } else {
-        $('.error_message').text('Выберите радиус для r');
-        setTimeout(function() {
-            $('.error_message').text(' ')
-        }, 4000);
+        printError("Выберите радиус для R");
     }
 }
-
-// Add mouse click event listeners to canvas
-canvas.addEventListener("click", mouseClicked, false);
-//canvas.addEventListener('click', getClickXY, false);
 
 let firstLoad = function () {
     let tempMarkers;
@@ -148,26 +113,29 @@ let firstLoad = function () {
         console.log(e);
     }
 
-    console.log(tempMarkers);
     if (tempMarkers !== undefined && tempMarkers !== null) {
         Markers = tempMarkers;
         for (let i = 0; i < Markers.length; i++) {
             Markers[i].Sprite = new Image();
-            if (Markers[i].hit === true) {
+
+            if (Markers[i].hit === true)
                 Markers[i].Sprite.src = spriteImage;
-            } else {
+            else
                 Markers[i].Sprite.src = redDotSprite;
-            }
         }
     }
 
-    if (tempMarkers === null) {
+    if (tempMarkers === null)
         Markers = [];
-    }
 }
 
 firstLoad();
 
+canvas.addEventListener("click", mouseClicked, false);
+r.addEventListener('input', function () {
+    Markers = [];
+    sessionStorage.setItem("dots", Markers);
+});
 
 let draw = function () {
     // Clear Canvas
@@ -186,13 +154,11 @@ let draw = function () {
     }
 };
 
-setInterval(draw, (1000 / 60)); // Refresh 60 times a second
-
-r.addEventListener('input', updateRadius);
-
-function updateRadius() {
-    Markers = [];
-    sessionStorage.setItem("dots", Markers);
+let printError = function (errorString) {
+    $('.error_message').text(errorString);
+    setTimeout(function() {
+        $('.error_message').text(' ')
+    }, 4000);
 }
 
 function saveDots() {
@@ -200,3 +166,4 @@ function saveDots() {
 }
 
 setInterval(saveDots, 0.01);
+setInterval(draw, (1000 / 60));

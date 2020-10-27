@@ -34,11 +34,9 @@ public class IndexPageController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("clearTable") != null && request.getParameter("clearTable").equals("true")) {
+        if (request.getParameter("clearTable") != null && request.getParameter("clearTable").equals("true"))
             request.getRequestDispatcher("/tableServlet").forward(request, response);
-        } else {
+        else
             request.getRequestDispatcher("/mainTable").forward(request, response);
-        }
-
     }
 }
