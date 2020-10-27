@@ -42,4 +42,13 @@
         <url-pattern>/tableServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>imageServlet</servlet-name>
+        <servlet-class>servlets.ImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>imageServlet</servlet-name>
+        <url-pattern>/imageServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

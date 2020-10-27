@@ -2,6 +2,7 @@ package servlets;
 
 import model.Table;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,5 +25,12 @@ public class TablePageServlet extends HttpServlet {
         outputStream.write(answer.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("clearTable") != null && request.getParameter("clearTable").equals("true")) {
+            Table.clearTable();
+        }
     }
 }

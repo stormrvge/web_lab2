@@ -37,43 +37,49 @@
             <form method="get">
                 <div class="x">
                     <input type="hidden" name="x" value="" id="xHiddenButton">
-                    Choose X: <br>
+                    <p> Choose X: </p>
 
-                    <label for="x1">
-                        <input type="button" id="x1" value="-2" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                    <div class="x-row">
+                        <label for="x1">
+                            <input type="button" id="x1" value="-2" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x2">
-                        <input type="button" id="x2" value="-1.5" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x2">
+                            <input type="button" id="x2" value="-1.5" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x3">
-                        <input type="button" id="x3" value="-1" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x3">
+                            <input type="button" id="x3" value="-1" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
+                    </div>
 
-                    <label for="x4">
-                        <input type="button" id="x4" value="-0.5" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                    <div class="x-row">
+                        <label for="x4">
+                            <input type="button" id="x4" value="-0.5" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x5">
-                        <input type="button" id="x5" value="0" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x5">
+                            <input type="button" id="x5" value="0" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x6">
-                        <input type="button" id="x6" value="0.5" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x6">
+                            <input type="button" id="x6" value="0.5" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
+                    </div>
 
-                    <label for="x7">
-                        <input type="button" id="x7" value="1" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                    <div class="x-row">
+                        <label for="x7">
+                            <input type="button" id="x7" value="1" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x8">
-                        <input type="button" id="x8" value="1.5" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x8">
+                            <input type="button" id="x8" value="1.5" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
 
-                    <label for="x9">
-                        <input type="button" id="x9" value="2" class="xButton" onclick="xButtonsValidate(this)">
-                    </label>
+                        <label for="x9">
+                            <input type="button" id="x9" value="2" class="xButton" onclick="xButtonsValidate(this)">
+                        </label>
+                    </div>
                 </div>
 
                 <div class="y">
@@ -88,7 +94,8 @@
                     <label for="r">
                         <span> Enter R: </span>
                         <span id="rInbound"> ∈ [1; 4]</span>
-                        <input id="r" type="text" name="r" placeholder="R" oninput="checkInboundR(this)">
+                        <input id="r" type="text" name="r" placeholder="R" oninput="checkInboundR(this)"
+                               onfocus="this.oldValue = this.value;">
                     </label>
                 </div>
 
@@ -100,8 +107,13 @@
             </form>
         </div>
 
-        <input type="button" onclick="location.href='${pageContext.request.contextPath}/table';"
-               value="Открыть таблицу" class="link_button"/>
+        <div class="table_buttons">
+            <input type="button" onclick="location.href='${pageContext.request.contextPath}/table';"
+                   value="Открыть таблицу" class="link_button"/>
+            <input type="button" onclick="clearTable()"
+                   value="Очистить таблицу" class="link_button"/>
+        </div>
+
 
         <div class="table" id="table">
             <table id="tableAnswer">
@@ -111,10 +123,14 @@
                     <td>R</td>
                     <td>Ответ</td>
                     <td>Время</td>
-                    <td>Время работы скрипта (мкс)</td>
+                    <td>Время ответа (мкс)</td>
                 </tr>
             </table>
         </div>
+    </div>
+
+    <div class="error_message">
+        <p></p>
     </div>
 
     <footer>

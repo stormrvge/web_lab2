@@ -1,6 +1,6 @@
 package servlets;
 
-import model.Request;
+import model.RequestValidator;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,16 +16,31 @@ public class IndexPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("IndexPageController init");
+        ServletContext servletContext = request.getServletContext();
+        servletContext.setAttribute("execStart", System.nanoTime());
 
-        if (request.getParameter("x") != null && request.getParameter("y") != null && request.getParameter("r") != null) {
-            String[] x = {request.getParameter("x")};
-            String[] y = {request.getParameter("y")};
-            String[] r = {request.getParameter("r")};
-            Request getRequest = new Request(x, y, r, 0);
-            ServletContext servletContext = request.getServletContext();
-            servletContext.setAttribute("UrlGetRequest", getRequest);
+        boolean isRequestValid = RequestValidator.validate(request);
+        servletContext.setAttribute("isRequestValid", isRequestValid);
+
+
+        if (isRequestValid) {
+            if (request.getParameter("pic") != null && request.getParameter("pic").equals("true"))
+                request.getRequestDispatcher("/imageServlet").forward(request, response);
+            else
+                request.getRequestDispatcher("/mainTable").forward(request, response);
         }
 
-        request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+        else
+            request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("clearTable") != null && request.getParameter("clearTable").equals("true")) {
+            request.getRequestDispatcher("/tableServlet").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/mainTable").forward(request, response);
+        }
+
     }
 }

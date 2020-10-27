@@ -19,6 +19,10 @@ public class Table {
         return ans.toString();
     }
 
+    public static Request getLastRequest() {
+        return requests.getLast();
+    }
+
     public static String getShortRequestString() {
         StringBuilder ans = new StringBuilder();
 
@@ -54,5 +58,9 @@ public class Table {
 
     public static void setRequests(LinkedList<Request> requestsList) {
         requests = requestsList;
+    }
+
+    public static void clearTable() {
+        requests.clear();
     }
 }

@@ -1,8 +1,3 @@
-function openTable() {
-    let url = sessionStorage.getItem("urlContext");
-    window.location.replace(url + "/table");
-}
-
 function xButtonsValidate(input) {
     let buttons = document.getElementsByClassName("xButton");
 
@@ -101,4 +96,20 @@ function clearButtons() {
     document.getElementsByClassName("x")[0].style.backgroundColor = "#f7f7f7";
     document.getElementsByClassName("y")[0].style.backgroundColor = "#f7f7f7";
     document.getElementsByClassName("r")[0].style.backgroundColor = "#f7f7f7";
+}
+
+function clearTable() {
+    Markers = [];
+    localStorage.setItem("dots", Markers);
+
+    $.ajax({
+        url: "test",
+        type: "post",
+        data: {
+            clearTable: "true",
+        },
+        success: function(answer) {
+            location.reload();
+            console.log("REQUEST SENT");
+        }});
 }
