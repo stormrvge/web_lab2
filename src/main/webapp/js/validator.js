@@ -52,8 +52,12 @@ function validateForm() {
 
     let check = true;
 
-    if (xButton.value < -2 || xButton.value > 2) {
+    if (xButton.value === "" || (xButton.value < -2 || xButton.value > 2)) {
         document.getElementsByClassName("x")[0].style.backgroundColor = "#ffa6b5";
+        setTimeout(function() {
+            document.getElementsByClassName("x")[0].style.backgroundColor = "#f7f7f7";
+        }, 4000);
+
         check = false;
     } else {
         document.getElementsByClassName("x")[0].style.backgroundColor = "#f7f7f7";
@@ -62,6 +66,10 @@ function validateForm() {
 
     if (!checkInboundY(yInput) || yInput.value === "") {
         document.getElementsByClassName("y")[0].style.backgroundColor = "#ffa6b5";
+        setTimeout(function() {
+            document.getElementsByClassName("y")[0].style.backgroundColor = "#f7f7f7";
+        }, 4000);
+
         check = false;
     } else {
         document.getElementsByClassName("y")[0].style.backgroundColor = "#f7f7f7";
@@ -69,14 +77,23 @@ function validateForm() {
 
     if (!checkInboundR(rInput) || rInput.value === "") {
         document.getElementsByClassName("r")[0].style.backgroundColor = "#ffa6b5";
+        setTimeout(function() {
+            document.getElementsByClassName("r")[0].style.backgroundColor = "#f7f7f7";
+        }, 4000);
+
         check = false;
     } else {
         document.getElementsByClassName("r")[0].style.backgroundColor = "#f7f7f7";
     }
 
 
+    if (check === false) {
+        $('.error_message').text('Данная точка не входит в множество');
+        setTimeout(function() {
+            $('.error_message').text(' ')
+        }, 4000);
+    }
 
-    console.log("validate " + check);
     return check;
 }
 
@@ -103,7 +120,7 @@ function clearTable() {
     localStorage.setItem("dots", Markers);
 
     $.ajax({
-        url: "test",
+        url: "lab2",
         type: "post",
         data: {
             clearTable: "true",

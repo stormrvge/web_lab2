@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: stormrage
-  Date: 23.10.2020
-  Time: 14:41
+  Date: 27.10.2020
+  Time: 14:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styles/table.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
     <title>Table with results</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <meta charset="utf-8">
@@ -24,10 +24,14 @@
         	</span>
     </header>
 
+    <div class="image">
+        <canvas id="Canvas" width="350" height="350"></canvas>
+    </div>
+
     <div class="info">
         <input type="button" onclick="location.href='${pageContext.request.contextPath}/lab2';"
                value="Новый запрос" class="link_button"/>
-        <p id="lab1_text">Таблица результатов</p>
+        <p id="lab1_text">Результат</p>
     </div>
 
 
@@ -41,6 +45,7 @@
                 <td>Время</td>
                 <td>Время работы скрипта (мкс)</td>
             </tr>
+
         </table>
     </div>
 </div>

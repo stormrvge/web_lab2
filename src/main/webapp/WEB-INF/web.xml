@@ -12,7 +12,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>indexPageController</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <url-pattern>/lab2</url-pattern>
     </servlet-mapping>
 
     <servlet>

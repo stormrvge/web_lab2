@@ -173,6 +173,11 @@ input {
     border: 1px solid black;
 }
 
+.r input {
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 input[type=submit], input[type=reset] {
     font-weight: 500;
     font-size: 13px;
@@ -189,8 +194,8 @@ input[type=submit]:hover, input[type=reset]:hover, .link_button:hover {
 }
 
 .error {
-    background-color: #ccc2c2;
-    border:2px solid red;
+    background-color: #b2a5a5;
+    border:1px solid #ff0000;
     border-radius: 5px;
 }
 
@@ -244,7 +249,7 @@ td:nth-child(-n+3) {
 
 
 
-@media (max-width: 915px) {
+@media (max-width: 950px) {
     .image {
         margin: auto;
         float: none;
@@ -264,5 +269,20 @@ td:nth-child(-n+3) {
     .table {
         float: none;
         margin: auto auto 70px;
+    }
+
+    table {
+        margin-top: 100px;
+    }
+
+    .link_button {
+        display: block;
+        margin-top: 30px;
+        float: none;
+        width: 120px;
+        height: 25px;
+        border: 0;
+        border-radius: 5px;
+        background-color: #f53858;
     }
 }

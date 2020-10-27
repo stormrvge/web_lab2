@@ -6,9 +6,9 @@ public class RequestValidator {
 
     public static boolean validate(HttpServletRequest request) {
         try {
-            float x = Float.parseFloat(request.getParameter("x"));
-            float y = Float.parseFloat(request.getParameter("y"));
-            float r = Float.parseFloat(request.getParameter("r"));
+            Double x = Double.parseDouble(request.getParameter("x"));
+            Double y = Double.parseDouble(request.getParameter("y"));
+            Double r = Double.parseDouble(request.getParameter("r"));
             boolean isXValid = false;
             boolean isYValid = false;
             boolean isRValid = false;
@@ -17,10 +17,10 @@ public class RequestValidator {
                     x == 0.5 || x == 1.0 || x == 1.5 || x == 2.0) {
                 isXValid = true;
             }
-            if (y >= -3 && y <= 5) {
+            if (y.compareTo(-3.0) > 0 && y.compareTo(5.0) < 0) {
                 isYValid = true;
             }
-            if (r >= 1 && r <= 4) {
+            if (r.compareTo(1.0) >= 0 && r.compareTo(4.0) <= 0) {
                 isRValid = true;
             }
 

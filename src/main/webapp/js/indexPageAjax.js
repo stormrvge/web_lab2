@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#send_button').click(function () {
         $.ajax({
-            url: "test",
+            url: "lab2",
             type: "get",
             data: {
                 x: $('#xHiddenButton').val(),
@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 $(document).ready(function(){
     $.ajax({
-        url: "test",
+        url: "lab2",
         type: "post",
         success: function(response) {
             let table = $('#tableAnswer');

@@ -63,9 +63,11 @@ let Marker = function () {
     this.XPoint = 0;
     this.YPoint = 0;
     this.hit = false;
+    this.r = r.value;
 }
 
 let Markers = [];
+let allMarkers = [];
 let mouseClicked = function (mouse) {
     if (r.value >= 1 && r.value <= 4) {
         pixel_step = 125 / r.value;
@@ -89,10 +91,10 @@ let mouseClicked = function (mouse) {
 
         if ((marker.XPoint >= -2 && marker.XPoint <= 2) && (marker.YPoint >= -3 && marker.YPoint <= 5)) {
             Markers.push(marker);
-            $('.error_message').text(' ');
+            allMarkers.push(marker);
 
             $.ajax({
-                url: "test",
+                url: "lab2",
                 type: "get",
                 data: {
                     x: Number((marker.XPoint).toFixed(2)),
@@ -121,8 +123,16 @@ let mouseClicked = function (mouse) {
                 }
             });
         } else {
-            $('.error_message').text('Данная точка не входит в множество')
+            $('.error_message').text('Данная точка не входит в множество');
+            setTimeout(function() {
+                $('.error_message').text(' ')
+            }, 4000);
         }
+    } else {
+        $('.error_message').text('Выберите радиус для r');
+        setTimeout(function() {
+            $('.error_message').text(' ')
+        }, 4000);
     }
 }
 
@@ -181,20 +191,12 @@ setInterval(draw, (1000 / 60)); // Refresh 60 times a second
 r.addEventListener('input', updateRadius);
 
 function updateRadius() {
-    MarkersMap.set(r.oldValue, Markers);
-
-    if (MarkersMap.get(r.value) !== null && MarkersMap.get(r.value) !== undefined) {
-        Markers = MarkersMap.get(r.value);
-        sessionStorage.setItem("dots", Markers);
-    } else {
-        Markers = [];
-        sessionStorage.setItem("dots", Markers);
-    }
-
+    Markers = [];
+    sessionStorage.setItem("dots", Markers);
 }
 
 function saveDots() {
     sessionStorage.setItem("dots", JSON.stringify(Markers));
 }
 
-setInterval(saveDots, 1);
+setInterval(saveDots, 0.01);

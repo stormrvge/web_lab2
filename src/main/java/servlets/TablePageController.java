@@ -12,8 +12,6 @@ public class TablePageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("TablePageController init");
-
         request.getRequestDispatcher("jsp/table.jsp").forward(request, response);
     }
 }

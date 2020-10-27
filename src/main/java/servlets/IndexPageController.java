@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/test")
+@WebServlet("/lab2")
 public class IndexPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("IndexPageController init");
         ServletContext servletContext = request.getServletContext();
         servletContext.setAttribute("execStart", System.nanoTime());
 
@@ -29,7 +28,6 @@ public class IndexPageController extends HttpServlet {
             else
                 request.getRequestDispatcher("/mainTable").forward(request, response);
         }
-
         else
             request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
     }

@@ -16,8 +16,6 @@ public class TablePageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("TablePageServlet init");
-
         MainPageTableServlet.addRequest(request);
 
         String answer = Table.getRequestString();

@@ -21,7 +21,6 @@ import java.util.Map;
 public class MainPageTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("MainPageTableServlet init");
         boolean isRequestValid = (boolean) request.getServletContext().getAttribute("isRequestValid");
 
         if (isRequestValid)
@@ -31,11 +30,6 @@ public class MainPageTableServlet extends HttpServlet {
             String answer = Table.getShortRequestString();
             OutputStream outputStream = response.getOutputStream();
             outputStream.write(answer.getBytes(StandardCharsets.UTF_8));
-            outputStream.flush();
-            outputStream.close();
-        } else if (!isRequestValid) {
-            OutputStream outputStream = response.getOutputStream();
-            outputStream.write("Не входит в множество".getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
             outputStream.close();
         }

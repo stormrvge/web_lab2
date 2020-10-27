@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Lab 1</title>
+    <title>Lab 2</title>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/ico">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
@@ -86,7 +86,7 @@
                     <label for="y">
                         <span> Enter Y: </span>
                         <span id="yInbound"> ∈ [-3; 5]</span>
-                        <input id="y" type="text" name="y" placeholder="Y" oninput="checkInboundY(this)">
+                        <input id="y" type="text" name="y" placeholder="Y" oninput="checkInboundY(this)" maxlength="15">
                     </label>
                 </div>
 
@@ -94,8 +94,8 @@
                     <label for="r">
                         <span> Enter R: </span>
                         <span id="rInbound"> ∈ [1; 4]</span>
-                        <input id="r" type="text" name="r" placeholder="R" oninput="checkInboundR(this)"
-                               onfocus="this.oldValue = this.value;">
+                        <input id="r" type="text" name="r" placeholder="R" onfocus="this.oldValue = this.value;"
+                               oninput="checkInboundR(this)" maxlength="15">
                     </label>
                 </div>
 
@@ -113,6 +113,7 @@
             <input type="button" onclick="clearTable()"
                    value="Очистить таблицу" class="link_button"/>
         </div>
+
 
 
         <div class="table" id="table">
